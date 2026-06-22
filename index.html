@@ -3449,15 +3449,28 @@ h1, h2, h3, .s-head, .sign-name, .tc-name, .tc-price,
 
       <!-- STEP 3: Demo Account -->
       <div class="ob-step reveal">
-        <h4>Step 03 Create Your Demo Account with GenesisFX</h4>
-        <p>Before trading with real money, start with a demo account. A demo account lets you practice the Octane Strategy risk-free using simulated funds. This is how Arin recommends every new member begin.</p>
-        <div class="ob-broker-steps">
-          <div class="ob-broker-step"><span class="ob-num">01</span><div><strong>Visit GenesisFX</strong><br/>Go to the GenesisFX website and click "Open Account."</div></div>
-          <div class="ob-broker-step"><span class="ob-num">02</span><div><strong>Select Demo Account</strong><br/>Choose "Demo" when prompted. No real money is required — you'll receive simulated practice funds.</div></div>
-          <div class="ob-broker-step"><span class="ob-num">03</span><div><strong>Complete Registration</strong><br/>Fill in your name, email, and country. Verify your email to activate.</div></div>
-          <div class="ob-broker-step"><span class="ob-num">04</span><div><strong>Connect to TradeLocker</strong><br/>Log into TradeLocker using your GenesisFX demo credentials. You're ready to practice.</div></div>
+        <h4>Step 03 Set Up Your Broker &amp; Demo Account</h4>
+        <p>First get your GenesisFX account set up, then create your demo account in TradeLocker. No funding needed yet — this is all about getting your demo running so you can start practicing.</p>
+
+        <div class="ob-broker-steps" style="margin-bottom:1.5rem;">
+          <div class="ob-broker-step" style="margin-bottom:.5rem;"><span class="ob-num" style="background:var(--burg);">GenesisFX</span></div>
+          <div class="ob-broker-step"><span class="ob-num">01</span><div><strong>Create Your GenesisFX Account</strong><br/>Sign up at GenesisFX using the link below.</div></div>
+          <div class="ob-broker-step"><span class="ob-num">02</span><div><strong>Verify Your Identity</strong><br/>Complete KYC verification — takes about 5 minutes. Have your ID ready.</div></div>
+          <div class="ob-broker-step"><span class="ob-num">03</span><div><strong>Download TradeLocker</strong><br/>Install TradeLocker from the App Store or Google Play, then open the app.</div></div>
         </div>
-        <a href="https://dashboard.genesisfxmarkets.com/auth/register?ref=ARILON827" class="ob-app-link" style="display:inline-block;margin-top:1.2rem;" target="_blank">Open GenesisFX Demo Account →</a>
+        <a href="https://client.genesisfx.io/register" class="ob-app-link" style="display:inline-block;margin-bottom:1.8rem;" target="_blank">Open GenesisFX →</a>
+
+        <div class="ob-broker-steps">
+          <div class="ob-broker-step" style="margin-bottom:.5rem;"><span class="ob-num" style="background:var(--burg);">Demo Account</span></div>
+          <div class="ob-broker-step"><span class="ob-num">01</span><div><strong>Open the Menu</strong><br/>Tap the 3 lines in the top left corner of TradeLocker.</div></div>
+          <div class="ob-broker-step"><span class="ob-num">02</span><div><strong>Press TradeLocker</strong><br/>Tap TradeLocker from the menu to access account options.</div></div>
+          <div class="ob-broker-step"><span class="ob-num">03</span><div><strong>Select New Account</strong><br/>Tap New Account to begin setting up your demo.</div></div>
+          <div class="ob-broker-step"><span class="ob-num">04</span><div><strong>Set Account Type to Demo</strong><br/>On the first dropdown, switch it from Live to Demo.</div></div>
+          <div class="ob-broker-step"><span class="ob-num">05</span><div><strong>Name Your Account</strong><br/>In the second field, type a name — keep it simple, like Demo.</div></div>
+          <div class="ob-broker-step"><span class="ob-num">06</span><div><strong>Keep the Broker as GenFX</strong><br/>Leave the third option set to GenFX or Standard — don't change it.</div></div>
+          <div class="ob-broker-step"><span class="ob-num">07</span><div><strong>Set Leverage to 1:500</strong><br/>Change the leverage setting to 1:500.</div></div>
+          <div class="ob-broker-step"><span class="ob-num">08</span><div><strong>Set Account Size</strong><br/>Keep it at $10,000 or change it to whatever amount you want to practice with. Then confirm to create the account.</div></div>
+        </div>
       </div>
 
       <!-- STEP 4: Live Account -->
@@ -3857,7 +3870,7 @@ const obs = new IntersectionObserver(entries => {
     setTimeout(()=>e.target.classList.add('in'), siblings.indexOf(e.target)*120);
     obs.unobserve(e.target);
   });
-}, {threshold:0.07});
+}, {threshold:0, rootMargin:"0px 0px -10px 0px"});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 /* ── Onboarding passcode ── */
@@ -3930,6 +3943,13 @@ function submitQuiz() {
     var btn = document.getElementById('zoom-direct-btn');
     if(btn) btn.href = url;
   };
+
+/* Reveal fallback — safety net if IntersectionObserver misses elements */
+setTimeout(function(){
+  document.querySelectorAll('.reveal').forEach(function(el){
+    el.classList.add('in');
+  });
+}, 1500);
 </script>
 
 <style>
@@ -3947,7 +3967,6 @@ function submitQuiz() {
 .nb, .sb, .fb { will-change: opacity; }
 .nav-bulbs, .foot-bulbs { will-change: auto; }
 .reveal { will-change: transform, opacity; }
-* { -webkit-backface-visibility: hidden; }
 /* Slow bulb chase so GPU isn't hammered */
 @keyframes bulbChase {
   0%,100% { opacity:.15; box-shadow:none; }
