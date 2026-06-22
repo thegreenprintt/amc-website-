@@ -1701,11 +1701,11 @@ h1, h2, h3, .s-head, .sign-name, .tc-name, .tc-price,
     transition:none;
   }
   .icc-num.icc-flash {
-    animation:numFlash .28s ease forwards;
+    animation:numFlash .22s ease forwards;
   }
   @keyframes numFlash {
-    0%   { opacity:0;  transform:scale(1.08); }
-    20%  { opacity:1;  transform:scale(1.0);  }
+    0%   { opacity:0;  transform:scale(1.04); }
+    12%  { opacity:1;  transform:scale(1.0);  }
     80%  { opacity:1;  transform:scale(0.97); }
     100% { opacity:0.6;transform:scale(0.95); }
   }
@@ -2942,7 +2942,7 @@ h1, h2, h3, .s-head, .sign-name, .tc-name, .tc-price,
       void numEl.offsetWidth;
       numEl.classList.add('icc-flash');
       i++;
-      setTimeout(tick,i<nums.length?750:600);
+      setTimeout(tick,i<nums.length?400:300);
     } else {
       wrapEl.style.transition='opacity 0.2s';
       wrapEl.style.opacity='0';
