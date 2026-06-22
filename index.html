@@ -1639,15 +1639,8 @@ h1, h2, h3, .s-head, .sign-name, .tc-name, .tc-price,
   ══════════════════════════════════════════════════════════ */
 
   /* ── Film grain overlay (entire site) ── */
-  body::after {
-    content:'';
-    position:fixed; inset:0; z-index:99990; pointer-events:none;
-    opacity:0.038;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.80' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
-    animation:grain .45s steps(1) infinite;
-  }
-  @keyframes grain {
-    0%,100%{background-position:0 0}
+  body::after { display:none; }
+  
     10%{background-position:-5% -10%}
     20%{background-position:-15% 5%}
     30%{background-position:7% -25%}
@@ -3802,18 +3795,18 @@ function makeBulbs(id, count, cls) {
   for(let i=0;i<count;i++) {
     const b = document.createElement('div');
     b.className = cls;
-    b.style.animationDelay = (i*0.06)+'s';
+    b.style.animationDelay = (i*0.12)+'s';
     el.appendChild(b);
   }
 }
-makeBulbs('navBulbs',70,'nb');
-makeBulbs('sbt',40,'sb');
-makeBulbs('sbb',40,'sb');
-makeBulbs('footBulbsTop',120,'fb');
-makeBulbs('footBulbs',120,'fb');
+makeBulbs('navBulbs',40,'nb');
+makeBulbs('sbt',20,'sb');
+makeBulbs('sbb',20,'sb');
+makeBulbs('footBulbsTop',50,'fb');
+makeBulbs('footBulbs',50,'fb');
 
 /* ── Theater seats ── */
-const aw = document.getElementById('audienceWrap');
+const aw = null; // disabled for performance // document.getElementById('audienceWrap');
 const rows = [
   {count:18,bkW:38,bkH:44,csW:36,csH:10,armH:28,hdW:22,hdH:26},
   {count:22,bkW:32,bkH:37,csW:30,csH:8,armH:24,hdW:18,hdH:22},
@@ -3948,5 +3941,20 @@ function submitQuiz() {
 #concessions .conc-item { font-family: 'DM Sans', sans-serif !important; font-style: normal !important; }
 #concessions h2.s-head   { font-family: 'DM Sans', sans-serif !important; }
 </style>
+
+<style>
+/* ══ PERFORMANCE ══ */
+.nb, .sb, .fb { will-change: opacity; }
+.nav-bulbs, .foot-bulbs { will-change: auto; }
+.reveal { will-change: transform, opacity; }
+* { -webkit-backface-visibility: hidden; }
+/* Slow bulb chase so GPU isn't hammered */
+@keyframes bulbChase {
+  0%,100% { opacity:.15; box-shadow:none; }
+  50%      { opacity:1;   box-shadow:0 0 6px 2px currentColor; }
+}
+.nb, .sb, .fb { animation-duration: 2.4s !important; }
+</style>
+
 </body>
 </html>
